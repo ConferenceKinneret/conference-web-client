@@ -1,0 +1,27 @@
+p {
+    font-family: 'Open Sans Regular';
+    font-size: 16px;
+    color: #464646;
+}
+table {
+    background-color: #fff;
+    font-family: 'Open Sans Regular';
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: 30px;
+
+    th {
+        background: #0087C7;
+        color: white !important;
+    }
+
+    th,
+    td {
+        font-size: 16px;
+        color: #464646;
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+}

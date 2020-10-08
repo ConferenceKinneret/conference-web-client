@@ -1,0 +1,27 @@
+<div class="container">
+    <app-header title="Show Confereces">
+        </app-header>
+
+        <ul class="list-group confereces">
+            <li class="list-group-item list-group-item-action waves-light"
+                *ngFor="let conference of conferences">
+                <div (click)="moveToEdit(conference.name)">
+                    <div class="hidden-sm hidden-xs col-md-2" *ngIf="!conference.image">
+                        <img class="d-block w-100 "
+                            src="assets/images/kinneret-logo.jpg">
+                    </div>
+                    <div class="hidden-sm hidden-xs col-md-2" *ngIf="conference.image">
+                        <img class="d-block w-100 "
+                            src="conference.image">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row"><span>{{conference.date}}</span></div>
+                        <hr>
+                        <div class="row"><span>{{conference.location}}</span></div>
+                        <hr>
+                        <div class="row"><span>{{conference.description}}</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+</div>

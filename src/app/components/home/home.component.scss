@@ -1,0 +1,29 @@
+.jumbotron {
+    background: #33FFFD; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4a00e0, #33FFFD); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4a00e0, #33FFFD);
+}
+
+.regist-details {
+    margin: auto;
+    right: 22%;
+}
+.cancle {
+    padding-left: 45px;
+}
+a {
+    padding-left: 2%;
+}
+
+img {
+    margin-left: 10%;
+}
+@media (max-width: 768px) {
+    .regist-details {
+        margin: auto;
+        right: 0;
+    }
+    .cancle {
+        margin-left: -9%;
+    }
+}

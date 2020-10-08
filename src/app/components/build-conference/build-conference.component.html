@@ -1,0 +1,392 @@
+<div class="container">
+    <app-header title="Build Conference"></app-header>
+    <section class="mb-4">
+        <!--Section heading - conferece name-->
+        <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-9 mb-md-0 mb-5">
+                <form [formGroup]="buildLectureForm" id="build-conference-form" name="build-conference-form"
+                    action="mail.php" method="POST" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="md-form mb-0">
+                                <label for="Conferece-name" class="">Conferece Name</label>
+                                <input type="text" formControlName="confereceName" id="Conferece-name"
+                                    name="Conferece-name" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.confereceName.errors }">
+                                <div *ngIf="submitted && f.confereceName.errors" class="invalid-feedback">
+                                    <div *ngIf="f.confereceName.errors.required">Conferece Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="md-form mb-0">
+                                <label for="Conferece-place" class="">Conferece Location</label>
+                                <input type="text" formControlName="conferecePlace" id="Conferece-place"
+                                    name="Conferece-place" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.conferecePlace.errors }">
+                                <div *ngIf="submitted && f.conferecePlace.errors" class="invalid-feedback">
+                                    <div *ngIf="f.conferecePlace.errors.required">Conferece Place is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="md-form mb-0">
+                                <label for="Conferece-date" class="">Conferece Date</label>
+                                <input type="date" formControlName="confereceDate" id="Conferece-date"
+                                    name="Conferece-date" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.confereceDate.errors }">
+                                <div *ngIf="submitted && f.confereceDate.errors" class="invalid-feedback">
+                                    <div *ngIf="f.confereceDate.errors.required">Conferece Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="md-form mb-0">
+                                <label for="Conferece-description">Conferece Description</label>
+                                <textarea type="text" formControlName="confereceDescription" id="Conferece-description"
+                                    name="Conferece-description" rows="3" class="form-control md-textarea"
+                                    [ngClass]="{ 'is-invalid': submitted && f.confereceDescription.errors }"></textarea>
+                            </div>
+                        </div>
+                    </div><br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="md-form mb-0 custom-file">
+                                <!--<label for="conferece-logo" #conferenceLogoLabel class="custom-file-label"><i
+                                        class="fas fa-search"></i>Conference logo</label>
+                                <input type="file" formControlName="confereceLogo" id="conferece-logo"
+                                    name="conferece-logo" class="custom-file-input"
+                                    (change)="conferenceLogoChange($event.target.files)">-->
+                                <label for="conferece-logo">Conference logo</label>
+                                <input type="text" formControlName="confereceLogo" id="conferece-logo"
+                                    name="conferece-logo" class="form-control" placeholder="Dropbox URL"
+                                    [ngClass]="{ 'is-invalid': submitted && f.confereceLogo.errors }">
+                            </div>
+                        </div>
+                    </div><br/>
+                    <label class="checkbox-label">
+                        <input class="checkbox" type="checkbox" formControlName="publish"
+                            id="conference-publish" name="conference-publish" data-md-icheck />
+                        To Publish
+                        <span class="checkmark" id="conference-publish"></span>
+                    </label>
+                    <hr/>
+                    <div formArrayName="sessions"
+                        *ngFor="let session of buildLectureForm.get('sessions').controls; let i=index">
+                        <div [formGroupName]="i">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'sessionName'+i}}" class="">Session Name</label>
+                                        <input type="text" formControlName="sessionName" id="{{'sessionName'+i}}"
+                                            name="{{'sessionName'+i}}" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && session.get('sessionName').errors }">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'sessionCategory'+i}}" class="">Session Topic</label>
+                                        <input type="text" formControlName="sessionCategory" id="{{'sessionCategory'+i}}"
+                                            name="{{'sessionCategory'+i}}" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && session.get('sessionCategory').errors }">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'sessionLocation'+i}}" class="">Session Location</label>
+                                        <input type="text" formControlName="sessionLocation" id="{{'sessionLocation'+i}}"
+                                            name="{{'sessionLocation'+i}}" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && session.get('sessionLocation').errors }">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'sessionLead'+i}}" class="">Session Chaif</label>
+                                        <input type="text" formControlName="sessionLead" id="{{'sessionLead'+i}}"
+                                            name="{{'sessionLead'+i}}" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && session.get('sessionLead').errors }">
+                                    </div>
+                                </div>
+                            </div><br/>
+                            <div class="col-sm-20 removeLecture">
+                                <button type="button" *ngIf="buildLectureForm.get('sessions').length > 1"
+                                    class="btn btn-danger btn-sm pull-right" title="Delete Session"
+                                    (click)="removeSession(i)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div><br />
+                            <hr *ngIf="buildLectureForm.get('sessions').length > 1"/>
+                        </div>
+                    </div><br/>
+                    <div class="addSession">
+                        <button type="button" class="btn btn-info" (click)="addNewSession()" title="Add Session">
+                        Add New Session
+                        </button>
+                    </div><br />
+                    <hr/>
+
+                    <div formArrayName="breaks"
+                        *ngFor="let break of buildLectureForm.get('breaks').controls; let i=index">
+                        <div [formGroupName]="i">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'breakName'+i}}" class="">Break Name</label>
+                                        <input type="text" formControlName="breakName" id="{{'breakName'+i}}"
+                                            name="{{'breakName'+i}}" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && break.get('breakName').errors }">
+                                    </div>
+                                </div>  
+                                    <div class="col-md-2">
+                                        <div class="md-form mb-0">
+                                            <label for="{{'breakStartTime'+i}}" class="">Start Time</label>
+                                            <input type="time" formControlName="breakStartTime"
+                                                id="{{'breakStartTime'+i}}" name="{{'breakStartTime'+i}}"
+                                                class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && break.get('breakStartTime').errors }">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="md-form mb-0">
+                                            <label for="{{'breakEndTime'+i}}" class="">End Time</label>
+                                            <input type="time" formControlName="breakEndTime" id="{{'breakEndTime'+i}}"
+                                                name="{{'breakEndTime'+i}}" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && break.get('breakEndTime').errors }">
+                                        </div>
+                                    </div>  
+                            </div>
+                            <div class="col-sm-20 removeLecture">
+                                <button type="button" *ngIf="buildLectureForm.get('breaks').length > 1"
+                                    class="btn btn-danger btn-sm pull-right" title="Delete Break"
+                                    (click)="removeBreak(i)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div><br />
+                            <hr *ngIf="buildLectureForm.get('breaks').length > 1"/>
+                        </div>
+                    </div><br/>
+                    <div class="addBreak">
+                        <button type="button" class="btn btn-info" (click)="addNewBreak()" title="Add Break">
+                        Add New Break
+                        </button>
+                    </div><br />
+                    <hr/>
+                    <div formArrayName="lectures"
+                        *ngFor="let lecture of buildLectureForm.get('lectures').controls; let i=index">
+                        <div [formGroupName]="i">
+                            <!--Grid row-->
+                            <div class="row">
+                                <!--Grid column-->
+                                <div class="col-md-4">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'lectureName'+i}}" class="">Lecture Name</label>
+                                        <input type="text" formControlName="lectureName" id="{{'lectureName'+i}}"
+                                            name="{{'lectureName'+i}}" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && lecture.get('lectureName').errors }">
+                                        <div *ngIf="submitted && lecture.get('lectureName').errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="lecture.get('lectureName').errors.required && submitted">Lecture
+                                                Name is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Grid column-->
+
+                                <!--Grid column-->
+                                <div class="col-md-2">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'lectureStartTime'+i}}" class="">Start Time</label>
+                                        <input type="time" formControlName="lectureStartTime"
+                                            id="{{'lectureStartTime'+i}}" name="{{'lectureStartTime'+i}}"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && lecture.get('lectureStartTime').errors }">
+                                        <div *ngIf="submitted && lecture.get('lectureStartTime').errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="lecture.get('lectureStartTime').errors.required && submitted">
+                                                Lecture Start Time is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'lectureEndTime'+i}}" class="">End Time</label>
+                                        <input type="time" formControlName="lectureEndTime" id="{{'lectureEndTime'+i}}"
+                                            name="{{'lectureEndTime'+i}}" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && lecture.get('lectureEndTime').errors }">
+                                        <div *ngIf="submitted && lecture.get('lectureEndTime').errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="lecture.get('lectureEndTime').errors.required && submitted">
+                                                Lecture End Time is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Grid column-->
+
+                            </div>
+                            <!--Grid row-->
+
+                            <!--Grid row-->
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'lectureDescription'+i}}">Lecture Description</label>
+                                        <textarea type="text" formControlName="lectureDescription"
+                                            id="{{'lectureDescription'+i}}" name="{{'lectureDescription'+i}}" rows="3"
+                                            class="form-control md-textarea"
+                                            [ngClass]="{ 'is-invalid': submitted && lecture.get('lectureDescription').errors }"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Grid row-->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'lectureSession'+i}}" class="">Session Name</label>
+                                        <input type="text" formControlName="lectureSession" id="{{'lectureSession'+i}}"
+                                            name="{{'lectureSession'+i}}" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && lecture.get('lectureSession').errors }">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Grid row-->
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="md-form mb-0">
+                                        <label for="{{'lectureClass'+i}}" class="">Class Room</label>
+                                        <input type="text" formControlName="lectureClass" id="{{'lectureClass'+i}}"
+                                            name="{{'lectureClass'+i}}" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && lecture.get('lectureClass').errors }">
+                                        <div *ngIf="submitted && lecture.get('lectureClass').errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="lecture.get('lectureClass').errors.required && submitted">
+                                                Lecture Class Room is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Grid column-->
+                                <div class="col-md-6 lecture-file">
+                                    <div class="md-form mb-0 custom-file">
+                                        <!--<label for="{{'lectureFile'+i}}" class="custom-file-label" #lectureFile><i
+                                                class="fas fa-search"></i>Choose Lecture File</label>
+                                        <input type="file" formControlName="lectureFile" id="{{'lectureFile'+i}}"
+                                            name="{{'lectureFile'+i}}" class="custom-file-input"
+                                            (change)="lectureFileChange($event.target.files)">-->
+                                        <label for="{{'lectureFile'+i}}">Choose Lecture File</label>
+                                        <input type="text" formControlName="lectureFile" id="{{'lectureFile'+i}}"
+                                            name="{{'lectureFile'+i}}" class="form-control" placeholder="Dropbox URL"
+                                            [ngClass]="{ 'is-invalid': submitted && f.confereceLogo.errors }">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Grid row-->
+
+                            <div formArrayName="authors"
+                                *ngFor="let author of lecture.get('authors').controls; let j=index">
+                                <div [formGroupName]="j">
+                                    <!--Grid row-->
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="md-form mb-0">
+                                                <label for="{{'authorName'+j}}">Author Name</label>
+                                                <input type="text" formControlName="authorName" id="{{'authorName'+j}}"
+                                                    name="{{'authorName'+j}}" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && author.get('authorName').errors }">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="md-form mb-0">
+                                                <label for="{{'authorCompany'+j}}">Author Company</label>
+                                                <input type="text" formControlName="authorCompany"
+                                                    id="{{'authorCompany'+j}}" name="{{'authorCompany'+j}}"
+                                                    class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && author.get('authorCompany').errors }">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="md-form mb-0">
+                                                <label for="{{'authorRole'+j}}">Author Role</label>
+                                                <input type="text" formControlName="authorRole" id="{{'authorRole'+j}}"
+                                                    name="{{'authorRole'+j}}" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && author.get('authorRole').errors }">
+                                            </div>
+                                        </div>
+                                    </div><br/>
+                                    <!--Grid row-->
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="md-form mb-0 custom-file">
+                                                <!--<label for="{{'authorImage'+j}}" #authorImageLabel class="custom-file-label"><i
+                                                        class="fas fa-search"></i>Author Image</label>
+                                                <input type="file" formControlName="authorImage" id="{{'authorImage'+j}}"
+                                                    name="{{'authorImage'+j}}" class="custom-file-input"
+                                                    [ngClass]="{ 'is-invalid': submitted && author.get('authorImage').errors }"
+                                                    (change)="authorImageChange($event.target.files)">-->
+                                                <label for="{{'authorImage'+j}}">Author Image</label>
+                                                <input type="text" formControlName="authorImage" id="{{'authorImage'+j}}"
+                                                    name="{{'authorImage'+j}}" class="form-control" placeholder="Dropbox URL"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.confereceLogo.errors }">
+                                            </div>
+                                        </div>
+                                    </div><br/>
+
+                                    <!--Grid row-->
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="md-form mb-0">
+                                                <label for="{{'authorCV'+j}}">Author CV</label>
+                                                <textarea type="text" formControlName="authorCV" id="{{'authorCV'+j}}"
+                                                    name="{{'authorCV'+j}}" rows="5"
+                                                    class="form-control md-textarea"></textarea>
+                                            </div>
+                                        </div>
+                                    </div><br />
+                                    <label class="checkbox-label" id="{{j}}">
+                                        <input class="checkbox" type="checkbox" formControlName="isLecturer"
+                                            id="{{'isLecturer'+j}}" name="{{'isLecturer'+j}}" data-md-icheck />
+                                        Is Lecturer
+                                        <span class="checkmark" id="{{'isLecturer'+j}}"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="addLecture">
+                                <button type="button" class="btn btn-info" (click)="addNewAuthor(i)" title="Add Author">
+                                    Add New Author
+                                </button>
+                            </div><br />
+                            <!--Grid row-->
+                            <br />
+                            <div class="col-sm-20 removeLecture">
+                                <button type="button" *ngIf="buildLectureForm.get('lectures').length > 1"
+                                    class="btn btn-danger btn-sm pull-right" title="Delete Lecture"
+                                    (click)="removeLecture(i)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div><br />
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="addLecture">
+                        <button type="button" class="btn btn-info" (click)="addNewLecture()" title="Add Lecture">
+                            Add New Lecture
+                        </button>
+                    </div><br />
+                    <div class="text-center text-md-left submitButton">
+                        <button type="submit" id="lecture-submit" class="btn btn-info">
+                            Save
+                        </button>
+                    </div>
+                </form><br />
+            </div>
+            <!--Grid column-->
+        </div>
+    </section>
+</div>

@@ -1,0 +1,54 @@
+<div class='main-nav'>
+    <div class='navbar navbar-inverse'>
+        <div class='navbar-header'>
+            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+                <span class='sr-only'>Toggle navigation</span> 
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span> 
+            </button>
+            <a class='navbar-brand' style="text-align: center;" [routerLink]="['/home']"> <h4>Conference</h4></a>
+            <div class="hidden-sm hidden-xs">
+                    <img  [routerLink]="['/home']" class="d-block w-100 " src="assets/images/kinneret-logo.jpg">
+            </div>
+        </div>
+        <div class='clearfix'>
+        </div>
+        <div class='navbar-collapse collapse'>
+            <ul class='nav navbar-nav'>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/home']">
+                        <span class='glyphicon glyphicon-home'></span> Home
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/build']">
+                        <span class='glyphicon glyphicon-th-list'></span> Build Conference
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/show']">
+                        <span class='glyphicon glyphicon-th-list'></span> Show Conferences
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                        <a [routerLink]="['/contact']">
+                            <span class='glyphicon glyphicon-th-list'></span> contact
+                        </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                        <a [routerLink]="['/about']">
+                            <span class='glyphicon glyphicon-th-list'></span> About
+                        </a>
+                </li>
+
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/login']" (click)="logOut()">
+                        <span class='glyphicon glyphicon-th-list'></span> Logout
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>

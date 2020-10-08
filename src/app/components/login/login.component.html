@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <h2 class="font-italic text-muted text-center">Login</h2>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="manger-email" class="">Email</label>
+            <input type="email" id="manger-email" name="manger-email" formControlName="email" autocomplete="off" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="manger-pass" class="">Password</label>
+            <input type="password" id="manger-pass" name="manger-pass" formControlName="password" autocomplete="off" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+        </div>
+        <br/>
+        <div class="form-group login">
+            <button [disabled]="loading" class="btn btn-info">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Login
+            </button>
+            <a routerLink="/register" class="btn btn-link">Register</a>
+        </div>
+    </form>
+</div>
